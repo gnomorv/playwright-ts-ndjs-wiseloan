@@ -176,3 +176,11 @@ To enhance this further, you could add:
 - Scheduled test runs
 - Test reports generation
 - Authentication for production use
+
+
+
+
+npx playwright test tests/sign-in-paid-user.spec.ts --project=chromium --headed
+npx playwright test tests/sign-in-active-user.spec.ts --project=chromium --headed
+npx playwright test tests/sign-in-written-off-user.spec.ts --project=chromium --headed
+npx playwright test tests/sign-in-past-due-user.spec.ts --project=chromium --headed

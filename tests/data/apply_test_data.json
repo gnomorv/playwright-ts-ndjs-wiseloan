@@ -1,6 +1,26 @@
 {
   "email": "test2610@test.com",
-  "ssn": "114-14-2610"
-
- 
+  "ssn": "114-14-2610",
+  "loginAccounts": {
+    "paid": {
+      "email": "testing1816@test.com",
+      "password": "1816"
+    },
+    "active": {
+      "email": "test2322@test.com",
+      "password": "2322"
+    },
+    "writtenOff": {
+      "email": "test2533@test.com",
+      "password": "2533"
+    },
+    "pastDue": {
+      "email": "test@testlimit.com",
+      "password": "5555"
+    },
+    "pending": {
+      "email": "test2610@test.com",
+      "password": "test2610@test.com"
+    }
+  }
 }
