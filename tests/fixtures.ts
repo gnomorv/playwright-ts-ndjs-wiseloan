@@ -48,13 +48,17 @@ function getRandomDateOfBirth(): string {
 
 export const test = base.extend<TestFixtures>({
   testData: async ({}, use) => {
-    // Read email from apply_test_data.json
+    // Read test data from apply_test_data.json
     const testDataFilePath = path.join(__dirname, 'data', 'apply_test_data.json');
     const testDataFile = JSON.parse(fs.readFileSync(testDataFilePath, 'utf-8'));
-    const email = testDataFile.email;
+
+    // Get current counter and generate dynamic email/ssn
+    const counter = testDataFile.counter;
+    const email = `${testDataFile.emailBase}${counter}@test.com`;
+    const ssn = `${testDataFile.ssnBase}${counter}`;
 
     // Extract email without domain
-    const emailWithoutDomain = email.split('@')[0]; // test2491
+    const emailWithoutDomain = email.split('@')[0];
 
     // Generate random names
     const randomFirstName = getRandomFirstName();
@@ -62,7 +66,7 @@ export const test = base.extend<TestFixtures>({
 
     // Format names:
     // firstName: "TEST_" + random dummy name (e.g., "TEST_James")
-    // lastName: random last name + "_" + email with no domain (e.g., "Smith_test2491")
+    // lastName: random last name + "_" + email with no domain (e.g., "Smith_test2612")
     const firstName = `TEST_${randomFirstName}`;
     const lastName = `${randomLastName}_${emailWithoutDomain}`;
 
@@ -74,6 +78,12 @@ export const test = base.extend<TestFixtures>({
     };
 
     await use(data);
+
+    // Increment counter for next test run
+    testDataFile.counter = counter + 1;
+    testDataFile.email = `${testDataFile.emailBase}${counter + 1}@test.com`;
+    testDataFile.ssn = `${testDataFile.ssnBase}${counter + 1}`;
+    fs.writeFileSync(testDataFilePath, JSON.stringify(testDataFile, null, 2));
   },
 });
 

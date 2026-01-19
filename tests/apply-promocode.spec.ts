@@ -151,7 +151,7 @@ test('Apply with Promo Codo TEST WISE', async ({ page, testData }) => {
 
   // Fill Next date you will get paid field
   await page.locator('input[name="input_18"]').scrollIntoViewIfNeeded();
-  await page.fill('input[name="input_18"]', '01/15/2026');
+  await page.fill('input[name="input_18"]', '02/03/2026');
   await page.waitForTimeout(200);
 
   await page.click('body');

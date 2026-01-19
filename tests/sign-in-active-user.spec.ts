@@ -43,6 +43,23 @@ test('Sign In - Active User', async ({ page }) => {
   });
   await page.waitForLoadState('domcontentloaded');
 
+  // Validate Dashboard navigation links
+  const dashboardLink = page.getByRole('link', { name: 'Dashboard' });
+  await expect(dashboardLink).toHaveAttribute('href', 'https://dev.wise.sandbox.xajeet.io/secure/dashboard/');
+
+  const changePasswordLink = page.getByRole('link', { name: 'Change Password' });
+  await expect(changePasswordLink).toHaveAttribute('href', 'https://dev.wise.sandbox.xajeet.io/secure/dashboard/change-password/');
+
+  const personalDetailsLink = page.getByRole('link', { name: 'Change Personal Details' });
+  await expect(personalDetailsLink).toHaveAttribute('href', 'https://dev.wise.sandbox.xajeet.io/secure/dashboard/personal-details/');
+
+  const signOutLink = page.getByRole('link', { name: 'Sign Out' });
+  await expect(signOutLink).toHaveAttribute('href', 'https://dev.wise.sandbox.xajeet.io/secure/sign-out/');
+
+  // Validate main logo redirects to WiseLoan homepage
+  const mainLogo = page.locator('a.logo, header a:has(img), .logo a').first();
+  await expect(mainLogo).toHaveAttribute('href', 'https://wiseloandev.wpengine.com/');
+
   // Take screenshot of Dashboard
   await page.screenshot({ path: 'screenshots/sign_in_active.png', fullPage: true });
 
